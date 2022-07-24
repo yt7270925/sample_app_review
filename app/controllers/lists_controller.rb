@@ -5,9 +5,12 @@ class ListsController < ApplicationController
   end
 
   def create
-    list = List.new(list_params)
-    list.save #データベースへ保存するメソッド
+    @list = List.new(list_params)
+    if @list.save #データベースへ保存するメソッド
     redirect_to list_path(list.id)
+    else
+      render :new
+    end
   end
 
   def index
